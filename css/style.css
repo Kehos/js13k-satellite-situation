@@ -1,0 +1,68 @@
+#gameCanvas {
+  position: relative;
+  left: 100px;
+  width: 500px;
+  height: 500px;
+  border: 1px solid lightgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#planet {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border-radius: 50%;
+}
+
+#satellites-orbit {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px lightcoral dashed;
+  border-radius: 50%;
+  -webkit-animation: spin-right 15s linear infinite;
+  animation: spin-right 15s linear infinite;
+}
+
+#satellite-1 {
+  position: absolute;
+  top: -10px;
+  left: 90px;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: coral;
+}
+
+#spaceship-orbit {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 2px lightblue dashed;
+  border-radius: 50%;
+  -webkit-animation: spin-right 20s linear infinite;
+  animation: spin-right 20s linear infinite;
+}
+
+#spaceship {
+  position: absolute;
+  top: -50px;
+  left: 125px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: blue;
+}
+
+@-webkit-keyframes spin-right {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
