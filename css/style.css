@@ -75,3 +75,11 @@
     transform: rotate(-360deg);
   }
 }
+
+.satellite {
+  width: 10px;
+  height: 10px;
+  background-color: lightseagreen;
+  border-radius: 50%;
+  z-index: 9;
+}
