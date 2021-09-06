@@ -43,16 +43,15 @@
   height: 350px;
   border: 2px lightblue dashed;
   border-radius: 50%;
-  -webkit-animation: spin-right 20s linear infinite;
-  animation: spin-right 20s linear infinite;
+  transform: rotate(0deg);
 }
 
 #spaceship {
   position: absolute;
-  top: -50px;
-  left: 125px;
-  width: 100px;
-  height: 100px;
+  top: -25px;
+  left: 150px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: blue;
 }
@@ -64,5 +63,15 @@
     -ms-transform: rotate(360deg);
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin-left {
+  100% {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
   }
 }
