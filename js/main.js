@@ -21,6 +21,7 @@ var positionLimit = 360;
 // Satellites orbit properties
 var orbit = document.getElementById('satellites-orbit');
 var orbitCenter = getCenter(orbit);
+var magicPosition = { x: 259, y: 369 };
 
 // Game properties
 var score = document.getElementById('score');
@@ -124,6 +125,7 @@ function shootSatellite() {
 
       // Check for collisions
       if (checkInsideOrbit(satellite)) {
+        stickSatellite(satellite);
         clearInterval(satelliteInterval);
       }
     }, 10
@@ -162,6 +164,7 @@ function isInsideCircle(element, circle, radius) {
   return distPoints < radius;
 }
 
+// Checks if satellite is colliding planet's orbit
 function checkInsideOrbit(satellite) {
   // Get satellite center
   var satelliteCenter = getCenter(satellite);
@@ -169,5 +172,35 @@ function checkInsideOrbit(satellite) {
   // Get orbit boundaries
   var orbitRadius = orbit.offsetWidth / 2;
 
-  return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+  // TODO
+  var isInside = isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+  if (isInside) {
+    console.log(satelliteCenter);
+    console.log(orbitCenter);
+    console.log(orbitRadius);
+
+    console.log(getOffset(satellite));
+    console.log(satellite.clientX);
+    console.log(satellite.clientY);
+  }
+
+  return isInside;
+
+  // return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+}
+
+// Sticks satellite to planet's orbit
+function stickSatellite(satellite) {
+  // Get satellite new position
+  var currentPosition = getOffset(satellite);
+  var newPosition = {
+    x: currentPosition.left - magicPosition.x,
+    y: currentPosition.top -magicPosition.y
+  };
+
+  // Apply new satellite properties
+  satellite.style.position = 'absolute';
+  satellite.style.left = `${newPosition.x}px`;
+  satellite.style.top = `${newPosition.y}px`;
+  orbit.appendChild(satellite);
 }
