@@ -18,9 +18,9 @@ var minSpeed = -2;
 var maxSpeed = 2;
 var positionLimit = 360;
 
-// Planet properties
-var planet = document.getElementById('planet');
-var planetOffset = getOffset(planet);
+// Satellites orbit properties
+var orbit = document.getElementById('satellites-orbit');
+var orbitCenter = getCenter(orbit);
 
 // Game properties
 var score = document.getElementById('score');
@@ -92,8 +92,10 @@ var satelliteId = 0;
 function shootSatellite() {
   // Get source position
   var sourcePosition = getOffset(player);
-
-  // Get target position
+  var satellitePosition = {
+    x: sourcePosition.left + player.offsetWidth / 2 - satelliteWidth / 2,
+    y: sourcePosition.top + player.offsetHeight
+  };
 
   // Create satellite
   var satellite = document.createElement('div');
@@ -101,10 +103,31 @@ function shootSatellite() {
   satelliteId++;
   satellite.classList.add('satellite');
   satellite.style.position = 'fixed';
-  satellite.style.left = `${sourcePosition.left + player.offsetWidth / 2 - satelliteWidth / 2}px`;
-  satellite.style.top = `${sourcePosition.top + player.offsetHeight}px`;
+  satellite.style.left = `${satellitePosition.x}px`;
+  satellite.style.top = `${satellitePosition.y}px`;
 
   gameContainer.insertBefore(satellite, game);
+
+  // Movement
+  var angle = Math.atan2(orbitCenter.y - satellitePosition.y, orbitCenter.x - satellitePosition.x);
+  var speed = 5;
+  var deltaX = Math.cos(angle) * speed;
+  var deltaY = Math.sin(angle) * speed;
+  var satelliteInterval = setInterval(
+    function() {
+      var newPositionX = satellitePosition.x += deltaX;
+      var newPositionY = satellitePosition.y += deltaY;
+
+      // Update position
+      satellite.style.left = `${newPositionX}px`;
+      satellite.style.top = `${newPositionY}px`;
+
+      // Check for collisions
+      if (checkInsideOrbit(satellite)) {
+        clearInterval(satelliteInterval);
+      }
+    }, 10
+  );
 }
 
 function decreaseSatellites() {
@@ -114,11 +137,37 @@ function decreaseSatellites() {
 
 // ----- Utils -----
 
-// Get element X and Y position
+// Get element X and Y base position
 function getOffset(el) {
   const rect = el.getBoundingClientRect();
   return {
     left: rect.left + window.scrollX,
     top: rect.top + window.scrollY
   };
+}
+
+// Get element X and Y center position
+function getCenter(el) {
+  var elementOffset = getOffset(el);
+  return {
+    x: elementOffset.left + el.offsetWidth / 2,
+    y: elementOffset.top + el.offsetHeight / 2
+  };
+}
+
+// Check if element center is inside a circle
+function isInsideCircle(element, circle, radius) {
+  var distPoints = (circle.x - element.x) * (circle.x - element.x) + (circle.y - element.y) * (circle.y - element.y);
+  radius *= radius;
+  return distPoints < radius;
+}
+
+function checkInsideOrbit(satellite) {
+  // Get satellite center
+  var satelliteCenter = getCenter(satellite);
+
+  // Get orbit boundaries
+  var orbitRadius = orbit.offsetWidth / 2;
+
+  return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
 }
