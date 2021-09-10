@@ -3,15 +3,13 @@ var keyA = 'a';
 var keyD = 'd';
 var keyLeft = 'ArrowLeft';
 var keyRight = 'ArrowRight';
-var movementKeys = [ keyA, keyD,keyLeft, keyRight ];
+var movementKeys = [ keyA, keyD, keyLeft, keyRight ];
 
 // Player properties
 var playerOrbit = document.getElementById('spaceship-orbit');
 var player = document.getElementById('spaceship');
 var playerSpeed = document.getElementById('speed');
 var currentPosition = 0;
-var initialSpeed = 0;
-var currentIncrement = initialSpeed;
 var speed = 0;
 var speedIncrement = 0.02;
 var minSpeed = -2;
@@ -19,7 +17,7 @@ var maxSpeed = 2;
 var positionLimit = 360;
 
 // Satellites orbit properties
-var orbit = document.getElementById('satellites-orbit');
+var orbit = document.getElementById('orbit-template');
 var orbitCenter = getCenter(orbit);
 var magicPosition = { x: 259, y: 369 };
 
@@ -32,8 +30,10 @@ var game = document.getElementById('gameCanvas');
 var satelliteWidth = 10;
 // TODO
 var satellitesRemaining = 5;
-var score = 0;
-var shooting = false;
+var currentScore = 0;
+
+// Rotation calculation properties
+var orbitRadius = orbit.offsetWidth / 2;
 
 // ----- Player movement -----
 var keys = {};
@@ -103,7 +103,6 @@ function shootSatellite() {
   satellite.setAttribute('id', `s-${satelliteId}`);
   satelliteId++;
   satellite.classList.add('satellite');
-  satellite.style.position = 'fixed';
   satellite.style.left = `${satellitePosition.x}px`;
   satellite.style.top = `${satellitePosition.y}px`;
 
@@ -169,10 +168,8 @@ function checkInsideOrbit(satellite) {
   // Get satellite center
   var satelliteCenter = getCenter(satellite);
 
-  // Get orbit boundaries
-  var orbitRadius = orbit.offsetWidth / 2;
-
   // TODO
+  /*
   var isInside = isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
   if (isInside) {
     console.log(satelliteCenter);
@@ -185,22 +182,35 @@ function checkInsideOrbit(satellite) {
   }
 
   return isInside;
+  */
+  // TODO
 
-  // return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+  return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
 }
 
 // Sticks satellite to planet's orbit
+var orbitId = 0;
 function stickSatellite(satellite) {
   // Get satellite new position
   var currentPosition = getOffset(satellite);
   var newPosition = {
     x: currentPosition.left - magicPosition.x,
-    y: currentPosition.top -magicPosition.y
+    y: currentPosition.top - magicPosition.y
   };
+
+  // Create new orbit
+  var newOrbit = document.createElement('div');
+  newOrbit.setAttribute('id', `o-${orbitId}`);
+  orbitId++;
+  newOrbit.classList.add('satellite-orbit');
+  game.appendChild(newOrbit);
 
   // Apply new satellite properties
   satellite.style.position = 'absolute';
   satellite.style.left = `${newPosition.x}px`;
   satellite.style.top = `${newPosition.y}px`;
-  orbit.appendChild(satellite);
+
+  // Stick satellite to new orbit
+  newOrbit.appendChild(satellite);
+  newOrbit.classList.add('animated');
 }

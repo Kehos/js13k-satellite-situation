@@ -17,24 +17,15 @@
   border-radius: 50%;
 }
 
-#satellites-orbit {
+.satellite-orbit {
   position: absolute;
   width: 200px;
   height: 200px;
-  border: 2px lightcoral dashed;
-  border-radius: 50%;
-  -webkit-animation: spin-right 15s linear infinite;
-  animation: spin-right 15s linear infinite;
 }
 
-#satellite-1 {
-  position: absolute;
-  top: -10px;
-  left: 90px;
-  height: 20px;
-  width: 20px;
-  border-radius: 100%;
-  background-color: coral;
+.satellite-orbit.animated {
+  -webkit-animation: spin-right 15s linear infinite;
+  animation: spin-right 15s linear infinite;
 }
 
 #spaceship-orbit {
@@ -77,6 +68,7 @@
 }
 
 .satellite {
+  position: fixed;
   width: 10px;
   height: 10px;
   background-color: lightseagreen;
