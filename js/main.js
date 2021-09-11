@@ -1,8 +1,16 @@
 // Game status machine
 var MAIN_MENU = 0, GAME_LOOP = 1, GAME_OVER = 2;
-var status = GAME_LOOP;
+var status = MAIN_MENU;
+
+// Game menu
+var PLAYING_CLASS = 'playing';
+var mainMenu = document.getElementById('menu');
+var lightbox = document.getElementById('lightbox');
+
+// TODO
 var gameStatus = document.getElementById('status');
 gameStatus.innerHTML = status;
+// TODO
 
 // Player movement controls
 var keyA = 'a', keyD = 'd', keyLeft = 'ArrowLeft', keyRight = 'ArrowRight';
@@ -249,7 +257,16 @@ function stickSatellite(satellite) {
 }
 
 // ----- State machine methods -----
+function startGame() {
+  status = GAME_LOOP;
+  gameStatus.innerHTML = status;
+  mainMenu.classList.add(PLAYING_CLASS);
+  lightbox.classList.add(PLAYING_CLASS);
+}
+
 function gameOver() {
   status = GAME_OVER;
   gameStatus.innerHTML = status;
+  mainMenu.classList.remove(PLAYING_CLASS);
+  lightbox.classList.remove(PLAYING_CLASS);
 }

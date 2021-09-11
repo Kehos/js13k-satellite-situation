@@ -6,12 +6,21 @@
   </head>
   <body>
     <h1>Satellite Situation</h1>
-    <div id="game">
-      <div id="menu">
-        
+    <div id="menu">
+      <button onclick="startGame()">Start</button>
+      <div class="controls">
+        <p>A / D // Left arrow / Right arrow -> Move spaceship</p>
+        <p>Spacebar -> Shoot satellite</p>
       </div>
+      <div class="credits">
+        <p>Game created by KehosWorld for js13k 2021</p>
+        <p><span>T</span>@master_kehos</p>
+        <p><span>T</span>kehos7</p>
+      </div>
+    </div>
+    <div id="lightbox"></div>
+    <div id="game">
       <div id="playerStats">
-        <p>Time: <span id="timer">00:00:00</span></p>
         <p>Satellites remaining: <span id="satellites">5</span></p>
         <p>Satellites on orbit: <span id="score">0</span></p>
         <p>Status: <span id="status">0</span></p>
