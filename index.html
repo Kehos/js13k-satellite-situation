@@ -7,25 +7,35 @@
   <body>
     <h1>Satellite Situation</h1>
     <div id="menu">
-      <button id="play" onclick="startGame()">Start</button>
-      <div class="controls">
-        <h3>Controls</h3>
-        <hr>
-        <p>A / D -- Left / Right arrows -> Move spaceship</p>
-        <p>Spacebar -> Shoot satellite</p>
+      <div id="mainMenu">
+        <button id="play" class="btn" onclick="startGame()">Start</button>
+        <div class="controls">
+          <h3>Controls</h3>
+          <hr>
+          <p>A / D -- Left / Right arrows -> Move spaceship</p>
+          <p>Spacebar -> Shoot satellite</p>
+        </div>
+        <div class="credits">
+          <h3>Credits</h3>
+          <hr>
+          <p>Game created by <a href="http://kehosworld.itch.io" target="_blank">KehosWorld</a> for js13k 2021</p>
+        </div>
       </div>
-      <div class="credits">
-        <h3>Credits</h3>
+      <div id="gameOver" class="hidden">
+        <h2>Game Over</h2>
+      </div>
+      <div id="levelComplete" class="hidden">
+        <h3>Level complete!</h3>
         <hr>
-        <p>Game created by <a href="http://kehosworld.itch.io" target="_blank">KehosWorld</a> for js13k 2021</p>
+        <button id="playAgain" class="btn" onclick="startGame(true)">Play again</button>
+        <button id="mainMenu" class="btn" onclick="goToMainMenu()">Main menu</button>
       </div>
     </div>
     <div id="lightbox"></div>
     <div id="game">
       <div id="playerStats">
         <p>Satellites remaining: <span id="satellites">5</span></p>
-        <p>Satellites on orbit: <span id="score">0</span></p>
-        <p>Status: <span id="status">0</span></p>
+        <p>Speed: <span id="status">0</span></p>
       </div>
       <div id="gameCanvas">
         

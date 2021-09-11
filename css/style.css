@@ -60,7 +60,24 @@ a:hover {
   text-align: center;
 }
 
-#play {
+#gameOver {
+  position: absolute;
+  top: -100px;
+  width: 100%;
+  left: 0;
+}
+
+#levelComplete {
+  display: flex;
+  flex-direction: column;
+}
+
+#playAgain {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn {
   width: 150px;
   margin: 0 auto;
   background-color: rgb(164, 78, 78);
@@ -73,14 +90,10 @@ a:hover {
   text-transform: uppercase;
 }
 
-#play:hover {
+.btn:hover {
   cursor: pointer;
   background-color: rgb(116, 57, 57);
   color: rgb(116, 116, 116);
-}
-
-#menu.playing, #lightbox.playing {
-  display: none;
 }
 
 #game {
@@ -194,4 +207,8 @@ a:hover {
   background-color: lightseagreen;
   border-radius: 50%;
   z-index: 9;
+}
+
+.hidden {
+  display: none !important;
 }

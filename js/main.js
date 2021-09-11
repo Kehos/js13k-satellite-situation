@@ -1,11 +1,14 @@
 // Game status machine
-var MAIN_MENU = 0, GAME_LOOP = 1, GAME_OVER = 2;
-var status = MAIN_MENU;
+var GAME_MENU = 0, GAME_LOOP = 1;
+var status = GAME_MENU;
 
 // Game menu
-var PLAYING_CLASS = 'playing';
-var mainMenu = document.getElementById('menu');
+var HIDDEN_CLASS = 'hidden';
+var menuBox = document.getElementById('menu');
+var mainMenu = document.getElementById('mainMenu');
 var lightbox = document.getElementById('lightbox');
+var gameOverText = document.getElementById('gameOver');
+var levelComplete = document.getElementById('levelComplete');
 
 // TODO
 var gameStatus = document.getElementById('status');
@@ -19,6 +22,7 @@ var movementKeys = [ keyA, keyD, keyLeft, keyRight ];
 // Player properties
 var playerOrbit = document.getElementById('spaceship-orbit');
 var player = document.getElementById('spaceship');
+var initialPosition = getOffset(player);
 var currentPosition = 0;
 var speed = 0;
 var speedIncrement = 0.02;
@@ -37,13 +41,13 @@ var difPosition = {
 };
 
 // Game properties
-var score = document.getElementById('score');
 var remaining = document.getElementById('satellites');
 var gameContainer = document.getElementById('game');
 var game = document.getElementById('gameCanvas');
 var satelliteWidth = 32;
-var satellitesRemaining = 5;
-var currentScore = 0;
+var initialSatellites = 5;
+var currentSatellites = initialSatellites;
+var satellitesRemaining = currentSatellites;
 
 // Rotation calculation properties
 var orbitRadius = orbit.offsetWidth / 2;
@@ -96,9 +100,6 @@ document.addEventListener('keyup', event => {
   if (status == GAME_LOOP && event.code == 'Space' && satellitesRemaining > 0) {
     // Shoot satellite
     shootSatellite();
-
-    // Decrease satellite count
-    decreaseSatellites();
   }
 });
 
@@ -145,14 +146,21 @@ function shootSatellite() {
         stickSatellite(satellite);
         clearInterval(satelliteInterval);
         satellites.push(satellite);
+        decreaseSatellites();
       }
     }, 10
   );
 }
 
+// Count satellite positioned. If all satellites are positioned, win the level
 function decreaseSatellites() {
   satellitesRemaining--;
   satellites.innerHTML = satellitesRemaining;
+  remaining.innerHTML = satellitesRemaining;
+
+  if (satellitesRemaining == 0) {
+    completeLevel();
+  }
 }
 
 // ----- Utils -----
@@ -219,9 +227,9 @@ function checkSatelliteCollided(satellite) {
 }
 
 // Remove a satellite
-function removeSatellite(satellite, interval) {
+function removeSatellite(satellite, interval = null) {
   if (satellite && satellite.parentElement) {
-    satellite.parentElement.removeChild(satellite);
+    satellite.parentElement.remove();
     clearInterval(interval);
   }
 }
@@ -254,17 +262,56 @@ function stickSatellite(satellite) {
   newOrbit.classList.add('animated');
 }
 
+// Clean possible previous game status
+function cleanGame() {
+  // Reset spaceship
+  currentPosition = 0, speed = 0;
+  playerOrbit.style.transform = `rotate(${currentPosition}deg)`;
+  player.style.left = initialPosition.left;
+  player.style.top = initialPosition.top;
+
+  // Reset satellites
+  currentSatellites = initialSatellites;
+  satellitesRemaining = currentSatellites;
+  remaining.innerHTML = satellitesRemaining;
+
+  // Clean satellites
+  satellites.forEach(function(satellite) {
+    removeSatellite(satellite);
+  });
+  satellites = [];
+}
+
 // ----- State machine methods -----
-function startGame() {
+function startGame(increaseDifficulty) {
   status = GAME_LOOP;
   gameStatus.innerHTML = status;
-  mainMenu.classList.add(PLAYING_CLASS);
-  lightbox.classList.add(PLAYING_CLASS);
+  mainMenu.classList.add(HIDDEN_CLASS);
+  lightbox.classList.add(HIDDEN_CLASS);
+  menuBox.classList.add(HIDDEN_CLASS);
+  gameOverText.classList.add(HIDDEN_CLASS);
+
+  // Clean previous game status
+  cleanGame();
 }
 
 function gameOver() {
-  status = GAME_OVER;
+  status = GAME_MENU;
   gameStatus.innerHTML = status;
-  mainMenu.classList.remove(PLAYING_CLASS);
-  lightbox.classList.remove(PLAYING_CLASS);
+  goToMainMenu();
+}
+
+function completeLevel() {
+  status = GAME_MENU;
+  gameStatus.innerHTML = status;
+  levelComplete.classList.remove(HIDDEN_CLASS);
+  lightbox.classList.remove(HIDDEN_CLASS);
+  menuBox.classList.remove(HIDDEN_CLASS);
+}
+
+function goToMainMenu() {
+  levelComplete.classList.add(HIDDEN_CLASS);
+  mainMenu.classList.remove(HIDDEN_CLASS);
+  menuBox.classList.remove(HIDDEN_CLASS);
+  gameOverText.classList.remove(HIDDEN_CLASS);
 }
