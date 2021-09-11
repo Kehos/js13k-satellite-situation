@@ -1,9 +1,33 @@
+h1 {
+  position: absolute;
+  margin: 0;
+  width: 200px;
+  text-align: center;
+}
+
+#playerStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#playerStats p {
+  margin-right: 16px;
+}
+
+#playerStats p:last-child {
+  margin-right: 0px;
+}
+
 #gameCanvas {
   position: relative;
-  left: 100px;
-  width: 500px;
-  height: 500px;
-  border: 1px solid lightgreen;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 650px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,10 +52,15 @@
   animation: spin-right 15s linear infinite;
 }
 
+#orbit-template {
+  border: 2px lightcoral dashed;
+  border-radius: 50%;
+}
+
 #spaceship-orbit {
-  position: absolute;
-  width: 350px;
-  height: 350px;
+  position: fixed;
+  width: 512px;
+  height: 512px;
   border: 2px lightblue dashed;
   border-radius: 50%;
   transform: rotate(0deg);
@@ -39,10 +68,10 @@
 
 #spaceship {
   position: absolute;
-  top: -25px;
-  left: 150px;
-  width: 50px;
-  height: 50px;
+  top: -32px;
+  left: 224px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background-color: blue;
 }
@@ -69,9 +98,15 @@
 
 .satellite {
   position: fixed;
-  width: 10px;
-  height: 10px;
+  width: 32px;
+  height: 32px;
   background-color: lightseagreen;
   border-radius: 50%;
   z-index: 9;
+}
+
+#s-test {
+  position: absolute;
+  left: 84px;
+  top: -16px;
 }

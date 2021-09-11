@@ -19,7 +19,7 @@ var positionLimit = 360;
 // Satellites orbit properties
 var orbit = document.getElementById('orbit-template');
 var orbitCenter = getCenter(orbit);
-var magicPosition = { x: 259, y: 369 };
+var magicPosition = { x: 445, y: 285 };
 
 // Game properties
 var score = document.getElementById('score');
@@ -27,7 +27,7 @@ var satellites = document.getElementById('satellites');
 var gameContainer = document.getElementById('game');
 var game = document.getElementById('gameCanvas');
 // TODO
-var satelliteWidth = 10;
+var satelliteWidth = 32;
 // TODO
 var satellitesRemaining = 5;
 var currentScore = 0;
@@ -38,6 +38,11 @@ var orbitRadius = orbit.offsetWidth / 2;
 // ----- Player movement -----
 var keys = {};
 var movementInterval = setInterval(movePlayer, 20);
+
+// TODO
+var spaceShipTest = document.getElementById('s-test');
+console.log(getOffset(spaceShipTest));
+// TODO
 
 onkeydown = function(e) {
   if (e && (movementKeys.includes(e.key))) {
@@ -213,4 +218,6 @@ function stickSatellite(satellite) {
   // Stick satellite to new orbit
   newOrbit.appendChild(satellite);
   newOrbit.classList.add('animated');
+
+  console.log(getOffset(satellite));
 }

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>js13k - Space</title>
+    <title>js13k - Satellite Situation</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <h1>Spaaaaaaaaaace!</h1>
+    <h1>Satellite Situation</h1>
     <div id="game">
       <div id="playerStats">
         <p>Time: <span id="timer">00:00:00</span></p>
-        <p>Satellites on orbit: <span id="score">0</span></p>
         <p>Satellites remaining: <span id="satellites">5</span></p>
+        <p>Satellites on orbit: <span id="score">0</span></p>
         <p>Speed: <span id="speed">0</span></p>
       </div>
       <div id="gameCanvas">
         
         <div id="planet"></div>
 
-        <div id="orbit-template" class="satellite-orbit"></div>
+        <div id="orbit-template" class="satellite-orbit">
+          <div id="s-test" class="satellite"></div>
+        </div>
 
         <div id="spaceship-orbit">
           <div id="spaceship"></div>
