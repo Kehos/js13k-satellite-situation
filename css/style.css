@@ -57,6 +57,12 @@ h1 {
   border-radius: 50%;
 }
 
+#satellite-template {
+  position: absolute;
+  left: 84px;
+  top: -16px;
+}
+
 #spaceship-orbit {
   position: fixed;
   width: 512px;
@@ -103,10 +109,4 @@ h1 {
   background-color: lightseagreen;
   border-radius: 50%;
   z-index: 9;
-}
-
-#s-test {
-  position: absolute;
-  left: 84px;
-  top: -16px;
 }
