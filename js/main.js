@@ -252,8 +252,6 @@ function stickSatellite(satellite) {
   // Stick satellite to new orbit
   newOrbit.appendChild(satellite);
   newOrbit.classList.add('animated');
-
-  console.log(getOffset(satellite));
 }
 
 // ----- State machine methods -----
