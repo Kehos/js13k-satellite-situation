@@ -1,14 +1,16 @@
+// Game status machine
+var MAIN_MENU = 0, GAME_LOOP = 1, GAME_OVER = 2;
+var status = GAME_LOOP;
+var gameStatus = document.getElementById('status');
+gameStatus.innerHTML = status;
+
 // Player movement controls
-var keyA = 'a';
-var keyD = 'd';
-var keyLeft = 'ArrowLeft';
-var keyRight = 'ArrowRight';
+var keyA = 'a', keyD = 'd', keyLeft = 'ArrowLeft', keyRight = 'ArrowRight';
 var movementKeys = [ keyA, keyD, keyLeft, keyRight ];
 
 // Player properties
 var playerOrbit = document.getElementById('spaceship-orbit');
 var player = document.getElementById('spaceship');
-var playerSpeed = document.getElementById('speed');
 var currentPosition = 0;
 var speed = 0;
 var speedIncrement = 0.02;
@@ -28,12 +30,10 @@ var difPosition = {
 
 // Game properties
 var score = document.getElementById('score');
-var satellites = document.getElementById('satellites');
+var remaining = document.getElementById('satellites');
 var gameContainer = document.getElementById('game');
 var game = document.getElementById('gameCanvas');
-// TODO
 var satelliteWidth = 32;
-// TODO
 var satellitesRemaining = 5;
 var currentScore = 0;
 
@@ -45,35 +45,35 @@ var keys = {};
 var movementInterval = setInterval(movePlayer, 20);
 
 onkeydown = function(e) {
-  if (e && (movementKeys.includes(e.key))) {
+  if (status == GAME_LOOP && e && (movementKeys.includes(e.key))) {
     keys[e.key] = true;
   }
 }
 
 onkeyup = function(e) {
-  if (e && (movementKeys.includes(e.key))) {
+  if (status == GAME_LOOP && e && (movementKeys.includes(e.key))) {
     keys[e.key] = false;
   }
 }
 
 function movePlayer() {
-  for (var key in keys) {
-    if (keys[key]) {
-      switch (key) {
-        case keyA:
-        case keyLeft:
-          if (speed > minSpeed) {
-            speed -= speedIncrement;
-            playerSpeed.innerHTML = speed;
-          }
-        break;
-        case keyD:
-        case keyRight:
-          if (speed < maxSpeed) {
-            speed += speedIncrement;
-            playerSpeed.innerHTML = speed;
-          }
-        break;
+  if (status == GAME_LOOP) {
+    for (var key in keys) {
+      if (keys[key]) {
+        switch (key) {
+          case keyA:
+          case keyLeft:
+            if (speed > minSpeed) {
+              speed -= speedIncrement;
+            }
+          break;
+          case keyD:
+          case keyRight:
+            if (speed < maxSpeed) {
+              speed += speedIncrement;
+            }
+          break;
+        }
       }
     }
   }
@@ -85,7 +85,7 @@ function movePlayer() {
 
 // ----- Satellite shoot -----
 document.addEventListener('keyup', event => {
-  if (event.code == 'Space') {
+  if (status == GAME_LOOP && event.code == 'Space' && satellitesRemaining > 0) {
     // Shoot satellite
     shootSatellite();
 
@@ -94,6 +94,7 @@ document.addEventListener('keyup', event => {
   }
 });
 
+var satellites = [];
 var satelliteId = 0;
 function shootSatellite() {
   // Get source position
@@ -127,10 +128,15 @@ function shootSatellite() {
       satellite.style.left = `${newPositionX}px`;
       satellite.style.top = `${newPositionY}px`;
 
-      // Check for collisions
-      if (checkInsideOrbit(satellite)) {
+      var satelliteCollided = checkSatelliteCollided(satellite);
+      if (satelliteCollided) {
+        removeSatellite(satellite, satelliteInterval);
+        gameOver();
+      } else if (checkInsideOrbit(satellite)) {
+        // Check for collisions
         stickSatellite(satellite);
         clearInterval(satelliteInterval);
+        satellites.push(satellite);
       }
     }, 10
   );
@@ -170,27 +176,46 @@ function isInsideCircle(element, circle, radius) {
 
 // Checks if satellite is colliding planet's orbit
 function checkInsideOrbit(satellite) {
-  // Get satellite center
   var satelliteCenter = getCenter(satellite);
+  return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+}
 
-  // TODO
-  /*
-  var isInside = isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
-  if (isInside) {
-    console.log(satelliteCenter);
-    console.log(orbitCenter);
-    console.log(orbitRadius);
+// Check if satellite collides with other satellites
+function checkSatelliteCollided(satellite) {
+  var collision = false;
 
-    console.log(getOffset(satellite));
-    console.log(satellite.clientX);
-    console.log(satellite.clientY);
+  for (var i = 0; i < satellites.length && !collision; i++) {
+    var target = satellites[i];
+
+    // Get satellite boundaries
+    var satelliteOffset = getOffset(satellite);
+    var satelliteMinX = satelliteOffset.left;
+    var satelliteMaxX = satelliteOffset.left + satellite.offsetWidth;
+    var satelliteMinY = satelliteOffset.top;
+
+    // Get target satellite boundaries
+    var targetOffset = getOffset(target);
+    var targetMinX = targetOffset.left;
+    var targetMaxX = targetOffset.left + target.offsetWidth;
+    var targetMinY = targetOffset.top;
+    var targetMaxY = targetOffset.top + target.offsetHeight;
+
+    // Check if boundaries collide
+    if ((satelliteMinX >= targetMinX && satelliteMinX <= targetMaxX && satelliteMinY >= targetMinY && satelliteMinY <= targetMaxY) ||
+      (satelliteMaxX >= targetMinX && satelliteMaxX <= targetMaxX && satelliteMinY >= targetMinY && satelliteMinY <= targetMaxY)) {
+      collision = true;
+    }
   }
 
-  return isInside;
-  */
-  // TODO
+  return collision;
+}
 
-  return isInsideCircle(satelliteCenter, orbitCenter, orbitRadius);
+// Remove a satellite
+function removeSatellite(satellite, interval) {
+  if (satellite && satellite.parentElement) {
+    satellite.parentElement.removeChild(satellite);
+    clearInterval(interval);
+  }
 }
 
 // Sticks satellite to planet's orbit
@@ -221,4 +246,10 @@ function stickSatellite(satellite) {
   newOrbit.classList.add('animated');
 
   console.log(getOffset(satellite));
+}
+
+// ----- State machine methods -----
+function gameOver() {
+  status = GAME_OVER;
+  gameStatus.innerHTML = status;
 }
