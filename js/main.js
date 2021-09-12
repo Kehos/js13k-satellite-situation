@@ -38,6 +38,7 @@ var difPosition = {
   y: getOffset(satelliteTemplate).top - satelliteBasePosition.y
 };
 var spriteMin = 1, spriteMax = 3;
+var initialVelocity = 15, currentVelocity = initialVelocity;
 
 // Game properties
 var planet = document.getElementById('planet');
@@ -270,6 +271,7 @@ function stickSatellite(satellite) {
   newOrbit.setAttribute('id', `o-${orbitId}`);
   orbitId++;
   newOrbit.classList.add('satellite-orbit');
+  newOrbit.style.animationDuration = `${currentVelocity}s`;
   game.appendChild(newOrbit);
 
   // Apply new satellite properties
@@ -285,8 +287,8 @@ function stickSatellite(satellite) {
 // Clean possible previous game status
 function cleanGame() {
   // Reset spaceship
-  currentPosition = 0, speed = 0;
-  playerOrbit.style.transform = `rotate(${currentPosition}deg)`;
+  currentPosition = 0, speed = 1;
+  playerOrbit.style.transform = `rotate(${currentPosition += speed}deg)`;
   player.style.left = initialPosition.left;
   player.style.top = initialPosition.top;
 
@@ -298,7 +300,7 @@ function cleanGame() {
 }
 
 // ----- State machine methods -----
-function startGame(increaseDifficulty) {
+function startGame(selectedLevel) {
   status = GAME_LOOP;
   mainMenu.classList.add(HIDDEN_CLASS);
   lightbox.classList.add(HIDDEN_CLASS);
@@ -306,14 +308,14 @@ function startGame(increaseDifficulty) {
   gameOverText.classList.add(HIDDEN_CLASS);
   gameFinished.classList.add(HIDDEN_CLASS);
 
-  // Check if increase difficulty
-  if (increaseDifficulty) {
+  // Apply current level settings
+  if (selectedLevel == 0) {
     currentLevel++;
-    currentSatellites += 5;
   } else {
-    currentLevel = initLevel;
-    currentSatellites = initialSatellites;
+    currentLevel = selectedLevel;
   }
+  currentSatellites = (5 * currentLevel);
+  currentVelocity = initialVelocity - (5 * (currentLevel - 1));
   level.innerHTML = currentLevel;
   satellitesRemaining = currentSatellites;
   remaining.innerHTML = satellitesRemaining;
