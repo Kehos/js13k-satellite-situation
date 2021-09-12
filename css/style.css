@@ -67,14 +67,24 @@ a:hover {
   left: 0;
 }
 
-#levelComplete {
+#levelComplete, #gameFinished {
   display: flex;
   flex-direction: column;
 }
 
-#playAgain {
-  margin-top: 20px;
-  margin-bottom: 20px;
+.satellites-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.satellites-menu .satellite {
+  position: unset;
+  margin-right: 20px;
+}
+
+.satellites-menu .satellite:last-child {
+  margin-right: 0px;
 }
 
 .btn {
@@ -88,6 +98,11 @@ a:hover {
   font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
   font-size: 24px;
   text-transform: uppercase;
+}
+
+.btn.play-again {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .btn:hover {
@@ -135,6 +150,9 @@ a:hover {
 
 #planet {
   position: absolute;
+  width: 100px;
+  height: 100px;
+  background: url(../img/sprite.png);
 }
 
 .satellite-orbit {
@@ -215,20 +233,22 @@ a:hover {
 .satellite {
   position: fixed;
   z-index: 9;
+  width: 32px;
+  height: 32px;
+}
+
+.satellite.s-1 {
+  background: url(../img/sprite.png) -332px 0;
+}
+
+.satellite.s-2 {
+  background: url(../img/sprite.png) -364px 0;
+}
+
+.satellite.s-3 {
+  background: url(../img/sprite.png) -396px 0;
 }
 
 .hidden {
   display: none !important;
 }
-
-
-
-
-.planet1{width:100px;height:100px;background:url(../img/sprite.png)}
-.planet2{width:100px;height:100px;background:url(../img/sprite.png) -100px 0}
-.planet3{width:100px;height:100px;background:url(../img/sprite.png) -200px 0}
-.propulsion{width:32px;height:32px;background:url(../img/sprite.png) -300px 0}
-.satellite1{width:32px;height:32px;background:url(../img/sprite.png) -332px 0}
-.satellite2{width:32px;height:32px;background:url(../img/sprite.png) -364px 0}
-.satellite3{width:32px;height:32px;background:url(../img/sprite.png) -396px 0}
-.spaceship{width:64px;height:64px;background:url(../img/sprite.png) -428px 0}

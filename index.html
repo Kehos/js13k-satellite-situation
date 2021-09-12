@@ -27,8 +27,20 @@
       <div id="levelComplete" class="hidden">
         <h3>Level complete!</h3>
         <hr>
-        <button id="playAgain" class="btn" onclick="startGame(true)">Play again</button>
-        <button id="mainMenu" class="btn" onclick="goToMainMenu()">Main menu</button>
+        <button class="btn play-again" onclick="startGame(true)">Play again</button>
+        <button class="btn" onclick="goToMainMenu()">Main menu</button>
+      </div>
+      <div id="gameFinished" class="hidden">
+        <h3>Game complete!</h3>
+        <hr>
+        <p>Thank you for playing</p>
+        <div class="satellites-menu">
+          <div class="satellite s-1"></div>
+          <div class="satellite s-2"></div>
+          <div class="satellite s-3"></div>
+        </div>
+        <button class="btn play-again" onclick="startGame()">Play again</button>
+        <button class="btn" onclick="goToMainMenu()">Main menu</button>
       </div>
     </div>
     <div id="lightbox"></div>
@@ -39,7 +51,7 @@
       </div>
       <div id="gameCanvas">
         
-        <img id="planet" src="img/planet1.svg" />
+        <div id="planet"></div>
 
         <div id="orbit-template" class="satellite-orbit">
           <div id="satellite-template" class="satellite"></div>

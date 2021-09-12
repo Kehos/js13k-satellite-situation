@@ -9,6 +9,7 @@ var mainMenu = document.getElementById('mainMenu');
 var lightbox = document.getElementById('lightbox');
 var gameOverText = document.getElementById('gameOver');
 var levelComplete = document.getElementById('levelComplete');
+var gameFinished = document.getElementById('gameFinished');
 
 // Player movement controls
 var keyA = 'a', keyD = 'd', keyLeft = 'ArrowLeft', keyRight = 'ArrowRight';
@@ -41,13 +42,15 @@ var spriteMin = 1, spriteMax = 3;
 // Game properties
 var planet = document.getElementById('planet');
 var remaining = document.getElementById('satellites');
+var level = document.getElementById('level');
 var gameContainer = document.getElementById('game');
 var game = document.getElementById('gameCanvas');
 var satelliteWidth = 32;
 var initialSatellites = 5;
 var currentSatellites = initialSatellites;
 var satellitesRemaining = currentSatellites;
-var initLevel = 1, currentLevel = initLevel;
+var initLevel = 1, maxLevel = 3, currentLevel = initLevel;
+var levels = { 1: '', 2: '-100px 0', 3: '-200px 0' };
 
 // Rotation calculation properties
 var orbitRadius = orbit.offsetWidth / 2;
@@ -118,11 +121,11 @@ function shootSatellite() {
   };
 
   // Create satellite
-  var satellite = document.createElement('img');
+  var satellite = document.createElement('div');
   satellite.setAttribute('id', `s-${satelliteId}`);
   satelliteId++;
-  satellite.src = `./img/satellite${getRandomSprite()}.svg`;
   satellite.classList.add('satellite');
+  satellite.classList.add(`s-${getRandomSprite()}`);
   satellite.style.left = `${satellitePosition.x}px`;
   satellite.style.top = `${satellitePosition.y}px`;
 
@@ -301,6 +304,7 @@ function startGame(increaseDifficulty) {
   lightbox.classList.add(HIDDEN_CLASS);
   menuBox.classList.add(HIDDEN_CLASS);
   gameOverText.classList.add(HIDDEN_CLASS);
+  gameFinished.classList.add(HIDDEN_CLASS);
 
   // Check if increase difficulty
   if (increaseDifficulty) {
@@ -310,9 +314,10 @@ function startGame(increaseDifficulty) {
     currentLevel = initLevel;
     currentSatellites = initialSatellites;
   }
+  level.innerHTML = currentLevel;
   satellitesRemaining = currentSatellites;
   remaining.innerHTML = satellitesRemaining;
-  planet.src = `./img/planet${currentLevel}.svg`;
+  planet.style.background = `url(./img/sprite.png) ${levels[currentLevel]}`;
 
   // Clean previous game status
   cleanGame();
@@ -326,13 +331,20 @@ function gameOver() {
 
 function completeLevel() {
   status = GAME_MENU;
-  levelComplete.classList.remove(HIDDEN_CLASS);
+  if (currentLevel == maxLevel) {
+    gameFinished.classList.remove(HIDDEN_CLASS);
+    levelComplete.classList.add(HIDDEN_CLASS);
+  } else {
+    levelComplete.classList.remove(HIDDEN_CLASS);
+    gameFinished.classList.add(HIDDEN_CLASS);
+  }
   lightbox.classList.remove(HIDDEN_CLASS);
   menuBox.classList.remove(HIDDEN_CLASS);
 }
 
 function goToMainMenu() {
   levelComplete.classList.add(HIDDEN_CLASS);
+  gameFinished.classList.add(HIDDEN_CLASS);
   mainMenu.classList.remove(HIDDEN_CLASS);
   menuBox.classList.remove(HIDDEN_CLASS);
 }
