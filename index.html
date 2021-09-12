@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>js13k - Satellite Situation</title>
+    <link rel="icon" type="image/png" href="img/satellite.png"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Satellite Situation</h1>
+    <div id="menu">
+      <div id="mainMenu">
+        <div class="level-selector">
+          <p>Select level:</p>
+          <button class="btn" onclick="startGame(1)">1</button>
+          <button class="btn" onclick="startGame(2)">2</button>
+          <button class="btn" onclick="startGame(3)">3</button>
+        </div>
+        <h3>Controls</h3>
+        <hr>
+        <p>A / D -- Left / Right arrows -> Move spaceship</p>
+        <p>Spacebar -> Shoot satellite</p>
+        <h3>Credits</h3>
+        <hr>
+        <p>Game created by <a href="http://kehosworld.itch.io" target="_blank">KehosWorld</a> for <a href="https://js13kgames.com/" target="_blank">js13k 2021</a></p>
+      </div>
+      <div id="gameOver" class="hidden">
+        <h2>Game Over</h2>
+      </div>
+      <div id="levelComplete" class="hidden">
+        <h3>Level complete!</h3>
+        <hr>
+        <button class="btn play-again" onclick="startGame(0)">Play again</button>
+        <button class="btn" onclick="goToMainMenu()">Main menu</button>
+      </div>
+      <div id="gameFinished" class="hidden">
+        <h3>Game complete!</h3>
+        <hr>
+        <p>Thank you for playing</p>
+        <div class="satellites-menu">
+          <div class="satellite s-1"></div>
+          <div class="satellite s-2"></div>
+          <div class="satellite s-3"></div>
+        </div>
+        <button class="btn play-again" onclick="startGame(1)">Play again</button>
+        <button class="btn" onclick="goToMainMenu()">Main menu</button>
+      </div>
+    </div>
+    <div id="lightbox"></div>
+    <div id="game">
+      <div id="playerStats">
+        <p>Level: <span id="level">1</span></p>
+        <p>Satellites remaining: <span id="satellites">5</span></p>
+      </div>
+      <div id="gameCanvas">
+        
+        <div id="planet"></div>
+
+        <div id="orbit-template" class="satellite-orbit">
+          <div id="satellite-template" class="satellite"></div>
+        </div>
+
+        <div id="spaceship-orbit">
+          <div id="propulsion1" class="hidden"></div>
+          <div id="spaceship"></div>
+          <div id="propulsion2" class="hidden"></div>
+        </div>
+
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
