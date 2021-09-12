@@ -39,8 +39,10 @@ var difPosition = {
   x: getOffset(satelliteTemplate).left - satelliteBasePosition.x,
   y: getOffset(satelliteTemplate).top - satelliteBasePosition.y
 };
+var spriteMin = 1, spriteMax = 3;
 
 // Game properties
+var planet = document.getElementById('planet');
 var remaining = document.getElementById('satellites');
 var gameContainer = document.getElementById('game');
 var game = document.getElementById('gameCanvas');
@@ -48,6 +50,7 @@ var satelliteWidth = 32;
 var initialSatellites = 5;
 var currentSatellites = initialSatellites;
 var satellitesRemaining = currentSatellites;
+var initLevel = 1, currentLevel = initLevel;
 
 // Rotation calculation properties
 var orbitRadius = orbit.offsetWidth / 2;
@@ -114,9 +117,10 @@ function shootSatellite() {
   };
 
   // Create satellite
-  var satellite = document.createElement('div');
+  var satellite = document.createElement('img');
   satellite.setAttribute('id', `s-${satelliteId}`);
   satelliteId++;
+  satellite.src = `./img/satellite${getRandomSprite()}.svg`;
   satellite.classList.add('satellite');
   satellite.style.left = `${satellitePosition.x}px`;
   satellite.style.top = `${satellitePosition.y}px`;
@@ -183,6 +187,11 @@ function getCenter(el) {
   };
 }
 
+// Get random satellite sprite
+function getRandomSprite() {
+  return Math.floor(Math.random() * (spriteMax - spriteMin + 1) + spriteMin);
+}
+
 // Check if element center is inside a circle
 function isInsideCircle(element, circle, radius) {
   var distPoints = (circle.x - element.x) * (circle.x - element.x) + (circle.y - element.y) * (circle.y - element.y);
@@ -229,8 +238,15 @@ function checkSatelliteCollided(satellite) {
 // Remove a satellite
 function removeSatellite(satellite, interval = null) {
   if (satellite && satellite.parentElement) {
-    satellite.parentElement.remove();
-    clearInterval(interval);
+    var satelliteId = satellite.getAttribute('id').split('s-')[1];
+    satellite.parentElement.removeChild(satellite);
+    var satelliteOrbit = document.getElementById(`o-${satelliteId}`);
+    if (satelliteOrbit) {
+      satelliteOrbit.remove();
+    }
+    if (interval) {
+      clearInterval(interval);
+    }
   }
 }
 
@@ -270,11 +286,6 @@ function cleanGame() {
   player.style.left = initialPosition.left;
   player.style.top = initialPosition.top;
 
-  // Reset satellites
-  currentSatellites = initialSatellites;
-  satellitesRemaining = currentSatellites;
-  remaining.innerHTML = satellitesRemaining;
-
   // Clean satellites
   satellites.forEach(function(satellite) {
     removeSatellite(satellite);
@@ -290,6 +301,18 @@ function startGame(increaseDifficulty) {
   lightbox.classList.add(HIDDEN_CLASS);
   menuBox.classList.add(HIDDEN_CLASS);
   gameOverText.classList.add(HIDDEN_CLASS);
+
+  // Check if increase difficulty
+  if (increaseDifficulty) {
+    currentLevel++;
+    currentSatellites += 5;
+  } else {
+    currentLevel = initLevel;
+    currentSatellites = initialSatellites;
+  }
+  satellitesRemaining = currentSatellites;
+  remaining.innerHTML = satellitesRemaining;
+  planet.src = `./img/planet${currentLevel}.svg`;
 
   // Clean previous game status
   cleanGame();

@@ -135,10 +135,6 @@ a:hover {
 
 #planet {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background-color: lightblue;
-  border-radius: 50%;
 }
 
 .satellite-orbit {
@@ -174,10 +170,6 @@ a:hover {
   position: absolute;
   top: -32px;
   left: 224px;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background-color: blue;
 }
 
 @-webkit-keyframes spin-right {
@@ -202,10 +194,6 @@ a:hover {
 
 .satellite {
   position: fixed;
-  width: 32px;
-  height: 32px;
-  background-color: lightseagreen;
-  border-radius: 50%;
   z-index: 9;
 }
 

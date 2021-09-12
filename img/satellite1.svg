@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="32px" height="32px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-73.8546,0)">
+        <g id="Satellite1" transform="matrix(0.5,0,0,0.5,-8.14538,0)">
+            <rect x="164" y="0" width="64" height="64" style="fill:none;"/>
+            <g id="Satellite" transform="matrix(1.01267,0,0,-1.01267,-2.56181,64.7812)">
+                <g transform="matrix(0.991192,0.172425,-0.132431,1.29053,9.64341,-44.5497)">
+                    <g transform="matrix(1,2.77556e-17,-2.77556e-17,1,71.0629,-3.72932)">
+                        <rect x="115.473" y="27.242" width="1.249" height="34.026" style="fill:rgb(51,123,204);"/>
+                    </g>
+                    <g transform="matrix(1,-6.10623e-16,3.88578e-16,0.73002,66.0566,1.11807)">
+                        <rect x="115.473" y="27.242" width="1.249" height="34.026" style="fill:rgb(51,123,204);"/>
+                    </g>
+                </g>
+                <g transform="matrix(-0.991192,0.172425,0.132431,1.29053,382.513,-44.5497)">
+                    <g transform="matrix(1,2.77556e-17,-2.77556e-17,1,71.0629,-3.72932)">
+                        <rect x="115.473" y="27.242" width="1.249" height="34.026" style="fill:rgb(51,123,204);"/>
+                    </g>
+                    <g transform="matrix(1,-6.10623e-16,3.88578e-16,0.73002,66.0566,1.11807)">
+                        <rect x="115.473" y="27.242" width="1.249" height="34.026" style="fill:rgb(51,123,204);"/>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,58.9876,-15.4261)">
+                    <circle cx="137.012" cy="28.074" r="9.989" style="fill:rgb(145,145,145);"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
