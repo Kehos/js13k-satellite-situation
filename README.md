@@ -18,6 +18,7 @@ To participate in the js13kGames competition all game entries must weight 13Kb o
 
 > sprite.png -> 5.27Kb
 
+
 > Total size -> 12.6Kb
 
 ### Application run instructions
