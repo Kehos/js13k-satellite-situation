@@ -8,12 +8,14 @@ To win the game you must locate all the satellites safely without any of them co
 
 ### Controls
 > A/D keys or Left/Right arrows -> Move spaceship
+
 > Spacebar -> Shoot satellite to planet
 
 ### Asset size
 To participate in the js13kGames competition all game entries must weight 13Kb or less, so the size is very important in this project. The minified game submitted for the jam is located into the `minified` folder and has the following files:
 
 > index.html -> 7.36Kb
+
 > sprite.png -> 5.27Kb
 
 > Total size -> 12.6Kb
