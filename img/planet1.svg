@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100px" height="100px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<svg width="100px" height="100px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,-193.752,-7.10543e-15)">
-        <g id="Planet1" transform="matrix(3.125,0,0,3.125,-693.96,7.10543e-15)">
+        <g transform="matrix(3.125,0,0,3.125,-693.96,7.10543e-15)">
             <rect x="284.068" y="0" width="32" height="32" style="fill:none;"/>
             <g transform="matrix(0.887032,0,0,0.887032,158.535,-64.6248)">
                 <circle cx="159.558" cy="90.893" r="18.038" style="fill:rgb(212,80,80);"/>

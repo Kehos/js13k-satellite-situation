@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="32px" height="32px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<svg width="32px" height="32px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,-113.188,0)">
-        <g id="Satellite2" transform="matrix(0.5,0,0,0.5,-5.73931,0)">
+        <g transform="matrix(0.5,0,0,0.5,-5.73931,0)">
             <rect x="237.855" y="0" width="64" height="64" style="fill:none;"/>
-            <g id="Satellite" transform="matrix(1.51847,1.51847,-1.51847,1.51847,-94.3153,-408.154)">
-                <g id="Body">
+            <g transform="matrix(1.51847,1.51847,-1.51847,1.51847,-94.3153,-408.154)">
+                <g>
                     <g transform="matrix(4.51816e-17,0.737871,-0.603354,3.69448e-17,271.099,-103.471)">
                         <rect x="173.764" y="13.709" width="0.937" height="6.056" style="fill:rgb(231,230,230);"/>
                     </g>
@@ -21,7 +19,7 @@
                         </g>
                     </g>
                 </g>
-                <g id="LeftWing" transform="matrix(0.53814,0,0,0.53814,166.691,11.5558)">
+                <g transform="matrix(0.53814,0,0,0.53814,166.691,11.5558)">
                     <rect x="149.32" y="20.046" width="23.346" height="9.948" style="fill:rgb(13,121,242);"/>
                     <clipPath id="_clip1">
                         <rect x="149.32" y="20.046" width="23.346" height="9.948"/>
@@ -35,7 +33,7 @@
                         </g>
                     </g>
                 </g>
-                <g id="RightWing" transform="matrix(0.53814,0,0,0.53814,189.727,11.5558)">
+                <g transform="matrix(0.53814,0,0,0.53814,189.727,11.5558)">
                     <rect x="149.32" y="20.046" width="23.346" height="9.948" style="fill:rgb(13,121,242);"/>
                     <clipPath id="_clip2">
                         <rect x="149.32" y="20.046" width="23.346" height="9.948"/>
@@ -49,7 +47,7 @@
                         </g>
                     </g>
                 </g>
-                <g id="Antenna">
+                <g>
                     <g transform="matrix(0.810924,0,0,0.358055,121.718,11.0536)">
                         <circle cx="176.5" cy="26.507" r="5.493" style="fill:rgb(201,201,201);"/>
                     </g>

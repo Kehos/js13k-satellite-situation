@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="64px" height="64px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g id="Spaceship" transform="matrix(0.0592593,0,0,0.0592593,0,0)">
+<svg width="64px" height="64px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(0.0592593,0,0,0.0592593,0,0)">
         <rect x="0" y="0" width="1080" height="1080" style="fill:none;"/>
-        <g id="Spaceship1" serif:id="Spaceship" transform="matrix(1.32953,0,0,-1.32953,-177.947,1257.95)">
-            <g id="LeftWing">
+        <g transform="matrix(1.32953,0,0,-1.32953,-177.947,1257.95)">
+            <g>
                 <g transform="matrix(23.1533,4.36757,-6.20391,16.3,-52.5023,165.375)">
                     <rect x="21.816" y="23.921" width="10.184" height="1.661" style="fill:rgb(77,74,74);"/>
                 </g>
@@ -15,7 +13,7 @@
                     <path d="M8.778,7.479L20.942,52.373L4.723,52.373L8.778,7.479Z" style="fill:rgb(210,209,209);"/>
                 </g>
             </g>
-            <g id="RightWing" transform="matrix(-1,0,0,1,1080,0)">
+            <g transform="matrix(-1,0,0,1,1080,0)">
                 <g transform="matrix(23.1533,4.36757,-6.20391,16.3,-52.5023,165.375)">
                     <rect x="21.816" y="23.921" width="10.184" height="1.661" style="fill:rgb(77,74,74);"/>
                 </g>
@@ -26,7 +24,7 @@
                     <path d="M8.778,7.479L20.942,52.373L4.723,52.373L8.778,7.479Z" style="fill:rgb(210,209,209);"/>
                 </g>
             </g>
-            <g id="Body">
+            <g>
                 <g transform="matrix(16.875,0,0,16.875,-11.5445,112.73)">
                     <path d="M32.684,14.356L40.274,40.63L32.684,49.388L25.094,40.63L32.684,14.356Z" style="fill:rgb(210,209,209);"/>
                 </g>

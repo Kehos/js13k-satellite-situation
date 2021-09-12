@@ -10,11 +10,6 @@ var lightbox = document.getElementById('lightbox');
 var gameOverText = document.getElementById('gameOver');
 var levelComplete = document.getElementById('levelComplete');
 
-// TODO
-var gameStatus = document.getElementById('status');
-gameStatus.innerHTML = status;
-// TODO
-
 // Player movement controls
 var keyA = 'a', keyD = 'd', keyLeft = 'ArrowLeft', keyRight = 'ArrowRight';
 var movementKeys = [ keyA, keyD, keyLeft, keyRight ];
@@ -22,6 +17,8 @@ var movementKeys = [ keyA, keyD, keyLeft, keyRight ];
 // Player properties
 var playerOrbit = document.getElementById('spaceship-orbit');
 var player = document.getElementById('spaceship');
+var propLeft = document.getElementById('propulsion1');
+var propRight = document.getElementById('propulsion2');
 var initialPosition = getOffset(player);
 var currentPosition = 0;
 var speed = 0;
@@ -68,6 +65,8 @@ onkeydown = function(e) {
 onkeyup = function(e) {
   if (status == GAME_LOOP && e && (movementKeys.includes(e.key))) {
     keys[e.key] = false;
+    propLeft.classList.add(HIDDEN_CLASS);
+    propRight.classList.add(HIDDEN_CLASS);
   }
 }
 
@@ -80,12 +79,14 @@ function movePlayer() {
           case keyLeft:
             if (speed > minSpeed) {
               speed -= speedIncrement;
+              propRight.classList.remove(HIDDEN_CLASS);
             }
           break;
           case keyD:
           case keyRight:
             if (speed < maxSpeed) {
               speed += speedIncrement;
+              propLeft.classList.remove(HIDDEN_CLASS);
             }
           break;
         }
@@ -296,7 +297,6 @@ function cleanGame() {
 // ----- State machine methods -----
 function startGame(increaseDifficulty) {
   status = GAME_LOOP;
-  gameStatus.innerHTML = status;
   mainMenu.classList.add(HIDDEN_CLASS);
   lightbox.classList.add(HIDDEN_CLASS);
   menuBox.classList.add(HIDDEN_CLASS);
@@ -320,13 +320,12 @@ function startGame(increaseDifficulty) {
 
 function gameOver() {
   status = GAME_MENU;
-  gameStatus.innerHTML = status;
+  gameOverText.classList.remove(HIDDEN_CLASS);
   goToMainMenu();
 }
 
 function completeLevel() {
   status = GAME_MENU;
-  gameStatus.innerHTML = status;
   levelComplete.classList.remove(HIDDEN_CLASS);
   lightbox.classList.remove(HIDDEN_CLASS);
   menuBox.classList.remove(HIDDEN_CLASS);
@@ -336,5 +335,4 @@ function goToMainMenu() {
   levelComplete.classList.add(HIDDEN_CLASS);
   mainMenu.classList.remove(HIDDEN_CLASS);
   menuBox.classList.remove(HIDDEN_CLASS);
-  gameOverText.classList.remove(HIDDEN_CLASS);
 }
